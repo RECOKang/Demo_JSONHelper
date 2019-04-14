@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 using WebAPIDemo.Helper;
 using WebAPIDemo.Models;
 
@@ -12,17 +11,23 @@ namespace WebAPIDemo.Controllers
 {
     public class DefaultController : ApiController
     {
-        List<Person> Users = UserFactory.GetSample();
+        IEnumerable<Person> Users = UserFactory.GetSample();
 
-        public List<Person> Get()
+        public IEnumerable<Person> Get()
         {
             return Users;
         }
 
         public Person Get(int id)
         {
-            var result = Users.FirstOrDefault(x => x.UserID == id)?? new Person();
+            var result = Users.FirstOrDefault(x => x.UserID == id) ?? new Person();
             return result;
+        }
+
+        [HttpPost]
+        public IHttpActionResult Post(Person user)
+        {
+            return Ok(Users.Where(x=>x.UserID == user.UserID));
         }
     }
 }

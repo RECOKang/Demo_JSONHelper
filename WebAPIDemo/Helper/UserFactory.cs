@@ -16,6 +16,24 @@ namespace WebAPIDemo.Helper
             new Person { UserID=4, UserName="Barry", Age=39}
         };
 
-        public static List<Person> GetSample() => persons;
+        static List<Person> persons2 = new List<Person>();
+
+
+        public static IEnumerable<Person> GetSample()
+        {
+            //var randomchar = "0123456789abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ";
+            //var rand = new Random();
+
+            //for (int i = 1; i <= 50000; i++)
+            //{
+            //    yield return new Person()
+            //    {
+            //        UserID = i,
+            //        UserName = new string(Enumerable.Repeat(randomchar, 10).Select(x => x[rand.Next(x.Length)]).ToArray()),
+            //        Age = rand.Next(10, 99)
+            //    };
+            //}
+            return persons;
+        }
     }
 }
